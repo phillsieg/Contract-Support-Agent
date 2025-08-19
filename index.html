@@ -1445,7 +1445,7 @@
                         type="text" 
                         id="litellmUrl" 
                         class="form-input" 
-                        value="https://llm.ravix.xyz"
+                        value="http://168.231.69.62:4000"
                         placeholder="http://your-litellm-server:4000"
                         style="width: 100%; padding: 0.4rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.75rem; margin-bottom: 0.5rem;"
                     >
@@ -1680,7 +1680,7 @@
                     openai: localStorage.getItem('openaiApiKey') || '',
                     custom: localStorage.getItem('customApiKey') || ''
                 };
-                this.litellmUrl = localStorage.getItem('litellmUrl') || 'https://llm.ravix.xyz';
+                this.litellmUrl = localStorage.getItem('litellmUrl') || 'http://168.231.69.62:4000';
                 this.litellmModel = localStorage.getItem('litellmModel') || 'anthropic/claude-3-7-sonnet-latest';
                 this.proxyUrl = 'http://localhost:3001'; // Default to local proxy server
                 this.initializeElements();
@@ -2337,14 +2337,13 @@
                     
                     console.log('Sending to LiteLLM:', { model: this.litellmModel, agent: agentId });
                     
-                    const response = await fetch(`${this.proxyUrl}/api/litellm`, {
+                    const response = await fetch(`${this.litellmUrl}/v1/chat/completions`, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${this.apiKeys.litellm}`
                         },
                         body: JSON.stringify({
-                            apiKey: this.apiKeys.litellm,
-                            serverUrl: this.litellmUrl,
                             model: this.litellmModel,
                             messages: [{
                                 role: 'user',
