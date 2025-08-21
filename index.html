@@ -2124,7 +2124,7 @@
                 this.chatTabs = document.getElementById('chatTabs');
                 this.currentAgentInfo = document.getElementById('currentAgentInfo');
                 this.activeAgentCount = document.getElementById('activeAgentCount');
-                this.workflowSelect = document.getElementById('workflowSelect');
+                // this.workflowSelect = document.getElementById('workflowSelect'); // Removed - no longer exists
                 
                 // Form elements
                 this.acquisitionFormOverlay = document.getElementById('acquisitionFormOverlay');
@@ -2353,12 +2353,7 @@
                     }
                 });
 
-                this.workflowSelect.addEventListener('change', (e) => {
-                    if (e.target.value) {
-                        this.startWorkflow(e.target.value);
-                        e.target.value = '';
-                    }
-                });
+                // Removed workflowSelect event listener - workflows dropdown no longer exists
 
                 // Agent setup form event listeners using event delegation with bound context
                 const self = this;
@@ -3571,7 +3566,7 @@
                         this.workflows = data.workflows || {};
                         this.populateModelSelect();
                         this.populateAgents();
-                        this.populateWorkflows();
+                        // this.populateWorkflows(); // Removed - workflows dropdown no longer exists
                         this.connectionInfo.textContent = 'Connected to Ollama';
                         if (data.currentModel) {
                             this.currentModel = data.currentModel;
@@ -3695,15 +3690,16 @@
                 });
             }
 
-            populateWorkflows() {
-                this.workflowSelect.innerHTML = '<option value="">Select workflow...</option>';
-                Object.entries(this.workflows).forEach(([workflowId, workflow]) => {
-                    const option = document.createElement('option');
-                    option.value = workflowId;
-                    option.textContent = workflow.name;
-                    this.workflowSelect.appendChild(option);
-                });
-            }
+            // populateWorkflows() {
+            //     // Function removed - workflows dropdown no longer exists
+            //     // this.workflowSelect.innerHTML = '<option value="">Select workflow...</option>';
+            //     // Object.entries(this.workflows).forEach(([workflowId, workflow]) => {
+            //     //     const option = document.createElement('option');
+            //     //     option.value = workflowId;
+            //     //     option.textContent = workflow.name;
+            //     //     this.workflowSelect.appendChild(option);
+            //     // });
+            // }
 
             toggleAgent(agentId) {
                 console.log('🔀 toggleAgent called for:', agentId);
