@@ -1511,7 +1511,7 @@
     </div>
 
     <!-- Procurement Planning Form Overlay -->
-    <div class="planning-overlay hidden" id="planningOverlay">
+    <div class="planning-overlay hidden" id="planningOverlay" onclick="if(event.target === this) { window.aiInterface?.closeProcurementPlanning(); console.log('Planning overlay clicked outside'); }">
         <div class="planning-form">
             <div class="planning-header">
                 <h2 class="planning-title">📋 Procurement Planning & Timeline</h2>
@@ -1592,7 +1592,7 @@
                 </div>
 
                 <div class="planning-footer">
-                    <button type="button" class="btn-cancel" id="closePlanningBtn">Close</button>
+                    <button type="button" class="btn-cancel" id="closePlanningBtn" onclick="window.aiInterface?.closeProcurementPlanning(); console.log('Planning close clicked');">Close</button>
                     <button type="button" class="btn-primary" id="exportPlanningBtn">📊 Export to Excel (with Gantt Chart)</button>
                 </div>
             </form>
@@ -1600,7 +1600,7 @@
     </div>
 
     <!-- Acquisition Process Visual Overlay -->
-    <div class="planning-overlay hidden" id="acquisitionProcessOverlay">
+    <div class="planning-overlay hidden" id="acquisitionProcessOverlay" onclick="if(event.target === this) { window.aiInterface?.closeAcquisitionProcessFramework(); console.log('Acquisition overlay clicked outside'); }">
         <div class="planning-form acquisition-process-form" style="max-width: 95%; width: 1200px;">
             <div class="planning-header">
                 <h2 class="planning-title">🔄 Acquisition Process</h2>
@@ -1734,7 +1734,7 @@
             </div>
 
             <div class="planning-footer">
-                <button type="button" class="btn-cancel" id="closeAcquisitionProcessBtn">Close</button>
+                <button type="button" class="btn-cancel" id="closeAcquisitionProcessBtn" onclick="window.aiInterface?.closeAcquisitionProcessFramework(); console.log('Acquisition close clicked');">Close</button>
             </div>
         </div>
     </div>
@@ -7880,7 +7880,8 @@ Your solicitation sections are being developed in parallel! 🎯`);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            new AIAgentInterface();
+            window.aiInterface = new AIAgentInterface();
+            console.log('AI Interface initialized and available globally');
         });
     </script>
 </body>
