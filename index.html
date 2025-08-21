@@ -1741,10 +1741,17 @@
 
     <div class="main-container">
         <aside class="sidebar">
-            <h3 style="margin-bottom: 0.5rem; color: #374151; margin-top: 0;">Workflows</h3>
-            <select id="workflowSelect" style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.875rem;">
-                <option value="">Select workflow...</option>
-            </select>
+            <button id="acquisitionProcessBtn" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; background: #059669; color: white; border: 1px solid #059669; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500;">
+                🔄 Acquisition Process
+            </button>
+            
+            <button id="procurementPlanningBtn" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; background: #1e40af; color: white; border: 1px solid #1e40af; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500;">
+                📋 Procurement Planning & Timeline
+            </button>
+            
+            <button id="solicitationSetupBtn" style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem; background: #7c3aed; color: white; border: 1px solid #7c3aed; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500;">
+                🇺🇸 Solicitation Setup (Optional)
+            </button>
             
             <div class="server-config" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; border: 1px solid #e5e7eb;">
                 <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #374151; font-size: 0.875rem;">Server Configuration</label>
@@ -1882,18 +1889,6 @@
                 </select>
                 <div class="model-info" id="modelInfo">Select a model to get started</div>
             </div>
-            
-            <button id="solicitationSetupBtn" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; background: #7c3aed; color: white; border: 1px solid #7c3aed; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500;">
-                🇺🇸 Solicitation Setup (Optional)
-            </button>
-            
-            <button id="procurementPlanningBtn" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; background: #1e40af; color: white; border: 1px solid #1e40af; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500;">
-                📋 Procurement Planning & Timeline
-            </button>
-            
-            <button id="acquisitionProcessBtn" style="width: 100%; padding: 0.5rem; margin-bottom: 1.5rem; background: #059669; color: white; border: 1px solid #059669; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500;">
-                🔄 Acquisition Process
-            </button>
             
             <h3 style="margin-bottom: 1rem; color: #374151;">Solicitation Agents</h3>
             <div class="agent-grid" id="agentGrid">
