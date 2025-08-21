@@ -2434,8 +2434,22 @@
 
                 // Procurement planning form event listeners
                 if (this.closePlanningBtn) {
-                    this.closePlanningBtn.addEventListener('click', () => {
+                    this.closePlanningBtn.addEventListener('click', (e) => {
+                        console.log('Planning close button clicked');
+                        e.preventDefault();
+                        e.stopPropagation();
                         this.closeProcurementPlanning();
+                    });
+                }
+
+                // Add click-outside-to-close functionality for procurement planning overlay
+                if (this.planningOverlay) {
+                    this.planningOverlay.addEventListener('click', (e) => {
+                        // Only close if clicking on the overlay background, not the form content
+                        if (e.target === this.planningOverlay) {
+                            console.log('Clicked outside planning form, closing');
+                            this.closeProcurementPlanning();
+                        }
                     });
                 }
 
@@ -2447,8 +2461,22 @@
 
                 // Acquisition process framework event listeners
                 if (this.closeAcquisitionProcessBtn) {
-                    this.closeAcquisitionProcessBtn.addEventListener('click', () => {
+                    this.closeAcquisitionProcessBtn.addEventListener('click', (e) => {
+                        console.log('Close button clicked');
+                        e.preventDefault();
+                        e.stopPropagation();
                         this.closeAcquisitionProcessFramework();
+                    });
+                }
+
+                // Add click-outside-to-close functionality for acquisition process overlay
+                if (this.acquisitionProcessOverlay) {
+                    this.acquisitionProcessOverlay.addEventListener('click', (e) => {
+                        // Only close if clicking on the overlay background, not the form content
+                        if (e.target === this.acquisitionProcessOverlay) {
+                            console.log('Clicked outside acquisition process form, closing');
+                            this.closeAcquisitionProcessFramework();
+                        }
                     });
                 }
 
@@ -4506,8 +4534,12 @@ Ready to start? What type of acquisition are you working on?`);
             }
 
             closeProcurementPlanning() {
+                console.log('closeProcurementPlanning called');
                 if (this.planningOverlay) {
                     this.planningOverlay.classList.add('hidden');
+                    console.log('Planning overlay hidden');
+                } else {
+                    console.log('planningOverlay element not found');
                 }
             }
 
@@ -5611,8 +5643,16 @@ Ready to start? What type of acquisition are you working on?`);
             }
 
             closeAcquisitionProcessFramework() {
+                console.log('closeAcquisitionProcessFramework called');
                 if (this.acquisitionProcessOverlay) {
                     this.acquisitionProcessOverlay.classList.add('hidden');
+                    console.log('Acquisition process overlay hidden');
+                    
+                    // Clear any selected steps and hide detail panels
+                    this.clearStepSelection();
+                    this.hideAllInlineDetails();
+                } else {
+                    console.log('acquisitionProcessOverlay element not found');
                 }
             }
 
