@@ -2162,6 +2162,14 @@
                 this.closeAcquisitionProcessBtn = document.getElementById('closeAcquisitionProcessBtn');
                 this.exportAcquisitionProcessBtn = document.getElementById('exportAcquisitionProcessBtn');
                 
+                // Debug logging for close buttons
+                console.log('Close buttons found:', {
+                    closePlanningBtn: !!this.closePlanningBtn,
+                    closeAcquisitionProcessBtn: !!this.closeAcquisitionProcessBtn,
+                    acquisitionProcessOverlay: !!this.acquisitionProcessOverlay,
+                    planningOverlay: !!this.planningOverlay
+                });
+                
                 this.formData = {};
             }
 
@@ -2432,7 +2440,7 @@
                     this.skipForm();
                 });
 
-                // Procurement planning form event listeners
+                // Procurement planning form event listeners with debug logging
                 if (this.closePlanningBtn) {
                     this.closePlanningBtn.addEventListener('click', (e) => {
                         console.log('Planning close button clicked');
@@ -2440,17 +2448,24 @@
                         e.stopPropagation();
                         this.closeProcurementPlanning();
                     });
+                    console.log('Planning close button listener attached');
+                } else {
+                    console.log('Planning close button NOT found');
                 }
 
                 // Add click-outside-to-close functionality for procurement planning overlay
                 if (this.planningOverlay) {
                     this.planningOverlay.addEventListener('click', (e) => {
+                        console.log('Planning overlay clicked:', e.target.id, e.target.className);
                         // Only close if clicking on the overlay background, not the form content
                         if (e.target === this.planningOverlay) {
                             console.log('Clicked outside planning form, closing');
                             this.closeProcurementPlanning();
                         }
                     });
+                    console.log('Planning overlay click listener attached');
+                } else {
+                    console.log('Planning overlay NOT found');
                 }
 
                 if (this.exportPlanningBtn) {
@@ -2459,26 +2474,62 @@
                     });
                 }
 
-                // Acquisition process framework event listeners
+                // Acquisition process framework event listeners with more robust approach
                 if (this.closeAcquisitionProcessBtn) {
                     this.closeAcquisitionProcessBtn.addEventListener('click', (e) => {
-                        console.log('Close button clicked');
+                        console.log('Acquisition close button clicked');
                         e.preventDefault();
                         e.stopPropagation();
                         this.closeAcquisitionProcessFramework();
                     });
+                    console.log('Acquisition close button listener attached');
+                } else {
+                    console.log('Acquisition close button NOT found');
                 }
 
                 // Add click-outside-to-close functionality for acquisition process overlay
                 if (this.acquisitionProcessOverlay) {
                     this.acquisitionProcessOverlay.addEventListener('click', (e) => {
+                        console.log('Acquisition overlay clicked:', e.target.id, e.target.className);
                         // Only close if clicking on the overlay background, not the form content
                         if (e.target === this.acquisitionProcessOverlay) {
                             console.log('Clicked outside acquisition process form, closing');
                             this.closeAcquisitionProcessFramework();
                         }
                     });
+                    console.log('Acquisition overlay click listener attached');
+                } else {
+                    console.log('Acquisition overlay NOT found');
                 }
+
+                // Add universal event delegation for close buttons as backup
+                document.addEventListener('click', (e) => {
+                    if (e.target && e.target.id === 'closeAcquisitionProcessBtn') {
+                        console.log('Acquisition close button clicked via delegation');
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.closeAcquisitionProcessFramework();
+                    }
+                    if (e.target && e.target.id === 'closePlanningBtn') {
+                        console.log('Planning close button clicked via delegation');
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.closeProcurementPlanning();
+                    }
+                });
+
+                // Add escape key listener to close popups
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        if (this.acquisitionProcessOverlay && !this.acquisitionProcessOverlay.classList.contains('hidden')) {
+                            console.log('Escape key pressed, closing acquisition process');
+                            this.closeAcquisitionProcessFramework();
+                        } else if (this.planningOverlay && !this.planningOverlay.classList.contains('hidden')) {
+                            console.log('Escape key pressed, closing planning');
+                            this.closeProcurementPlanning();
+                        }
+                    }
+                });
 
                 if (this.exportAcquisitionProcessBtn) {
                     this.exportAcquisitionProcessBtn.addEventListener('click', () => {
